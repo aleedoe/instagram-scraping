@@ -1,0 +1,31 @@
+curl 'https://www.instagram.com/graphql/query' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9,id;q=0.8' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -H 'cookie: ig_did=EC14FC3F-9357-4441-AEFB-53EB730ABD90; datr=zFgXZdRGC-535k0CAitDybVA; mid=ZRdYzgALAAGBplh9c22viuzLmvvj; ig_nrcb=1; fbm_124024574287414=base_domain=.instagram.com; ps_n=1; ps_l=1; shbid="9690\0549212171449\0541754748943:01f79d462ffcca7292de3256d5704ec6dcd29fa115293d7cb3450fd68b0f792ff85f1a73"; shbts="1723212943\0549212171449\0541754748943:01f7e02340085814677b0c2f8f73aac79aa059b7710382c925febcf75ded6d4cb3263820"; ds_user_id=13205355323; csrftoken=1FOJWuO2uqlLywpIkOwVa3bV1NaNWAv2; sessionid=13205355323%3AXwi6o98sMWXZL3%3A18%3AAYeuyMM5LhbVz3AK7xfIv3tynRwEHEtq12flrMLUpA; wd=1517x712; dpr=0.8999999761581421; fbsr_124024574287414=RMjVuWJLrpJH0PgsLYFZ7taVXnNB7C5c8ZU8otCjoYc.eyJ1c2VyX2lkIjoiMTAwMDM1OTk1MjUwNDMxIiwiY29kZSI6IkFRQWlSLVpPcHVraE8wQVpya0o1alBoWWtGbTdUWmZMNnktVGt0cVh2bm1VWFF0amhPOVFrMEFXUi0yNkFnY212Q2VadVRQZ1dtQ3dwTmF6VEFTSEd6T1BQYzJPQ0JlMi1VcDlZdEVrdEtQekx1cWdmRnc5Zjk4cEUyb28xeUtzMHRPQ3o3MTFib2FOdHhRUnowZy05VFRhSWxWVG1HU1R3Rk5ua1FUVVA1em03V0Y5SDVWOW0yc2RuWmJ1b3B2LU9LMDRsd093YzdRZ2hQZXJKVDRZSUJ1Q2Q1Y3N6anhoR2k5VXY2TGQxbVViMjJiVE9odlZUY2ZDR0ZacWFWOHRXUUZLT2ttT3o4YVNpdnQtUzRYUVdlTjl2X1Q3LVl4TXVYRE5fRjZoNkd4RHpMUEZ5a3JSd3hBbDdGMmo2MENSWjdRWEV2U0xzeDBoUmtuNms4aGU2ZGVUIiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCTzdCbzlhYm5pTDBMaTFKS1pBb3Z2enV4dUg2VjA1RlpCVUFWQlpDeWZJNXpDcWlkd0diVnlTNk9sMzUzQ0w0OFM4MExtM2hUaVdycWhOZlYyUkZMYW9jVW1jdWhHdHphNmNFOHBRV3hPVmF4VFcyZFpDc3JhOFJ4S3paQmpsNHNjSEJtdkNOZkQ5aUVaQTlzVFNuZFBpYVduRzJIczJiMkJSZXJxZVl5bVZVNUNqNmJoUlBtaG9pdEVaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNzIzNDMyMDIwfQ; rur="EAG\05413205355323\0541754971058:01f7d518dd3b93492621a45f37bfeea6a4eacc889bf0ee6623da1360d39e66f8968ee4bd"; fbsr_124024574287414=9oKuF99-GG8kiYF184IXyhHdNsi_MZ0zRqNoFbpnWnk.eyJ1c2VyX2lkIjoiMTAwMDM1OTk1MjUwNDMxIiwiY29kZSI6IkFRQjA0Y1NXWnhvVUpuNldnRldlMldKSmJzb2pLVnZSWE1TeUlPLWRMeEZ0c0dZWWdieWoxX1FveEpMOG5xQTR2NTV6SkFzcC1od090V3hYalFKVTcwbk84cGMzcFgzSERuNXh4RkhMdU9yakN4SE5KQW5aSTRtTFBKazg3Mi1tWEwtQ3RDTmFhaHhaX21KOXhWTy1TMk1SYXNYUzFVSG5mRUtaME52VlVoNG5zYXRTTXJJYTBrZU56QzZjRm9MbkxYTXNRcWRtZXUxRXRqWEZ6ZUhJU3JRVm9hZ0NDVm44SWRLRU51dTZEUlZoZ2NGekt2Q0NsVGtxMHlrNGFkT2ZMQ29FQlBFWnVpMXB5elI4RWhCNGppRDJoMHM5OGV2M3cyS0RRcFYtbzhvMWMyNC1GTm91eWVCRDIzYU1jZ2l3UHRnelRSLVk0czZQMDlmck9IYm0tRk9jIiwib2F1dGhfdG9rZW4iOiJFQUFCd3pMaXhuallCT3d3STRCMUNZS1BBWHp4d1dCajQ2RjJ2WkFaQkREQm9nbGxJZ0RmeDZhZGlxNEtQRzlSMXZpckhmbFpDbUZyS3kxdVREM0gxeUlHNzFuOXJEM0tMM0dnNVkwY1kzYVpCYTBkSEFCUmdwd25LaTVBSEd2OW1Yd2lXdkVoTmhGNTVPUkpHakxsZUVIODZGUWZlQkFXajdsMGhzWkJsSnZnTkxEQVpBTHZZV1ZDbU51QzU3aUdkemZseVlaRCIsImFsZ29yaXRobSI6IkhNQUMtU0hBMjU2IiwiaXNzdWVkX2F0IjoxNzIzNDM1Mzc2fQ' \
+  -H 'origin: https://www.instagram.com' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://www.instagram.com/agablackjack/' \
+  -H 'sec-ch-prefers-color-scheme: dark' \
+  -H 'sec-ch-ua: "Not)A;Brand";v="99", "Google Chrome";v="127", "Chromium";v="127"' \
+  -H 'sec-ch-ua-full-version-list: "Not)A;Brand";v="99.0.0.0", "Google Chrome";v="127.0.6533.100", "Chromium";v="127.0.6533.100"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-model: ""' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-ch-ua-platform-version: "10.0.0"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36' \
+  -H 'x-asbd-id: 129477' \
+  -H 'x-bloks-version-id: d48864a035b1835e7d6839f3f4f6eccef248b3d94fbc4ded47b31025a6d691c3' \
+  -H 'x-csrftoken: 1FOJWuO2uqlLywpIkOwVa3bV1NaNWAv2' \
+  -H 'x-fb-friendly-name: PolarisProfilePostsTabContentDirectQuery_connection' \
+  -H 'x-fb-lsd: sVV3RHR-GQbzjPEXD1QunD' \
+  -H 'x-ig-app-id: 936619743392459' \
+  --data-raw 'av=17841413299690669&__d=www&__user=0&__a=1&__req=1s&__hs=19947.HYP%3Ainstagram_web_pkg.2.1..0.1&dpr=1&__ccg=UNKNOWN&__rev=1015584519&__s=gcek3d%3Aieo156%3Ampstyf&__hsi=7402084481609375028&__dyn=7xeUjG1mxu1syUbFp41twpUnwgU7SbzEdF8aUco2qwJxS0k24o0B-q1ew65xO0FE2awgo9oO0n24oaEnxO1ywOwv89k2C1Fwc60D87u3ifK0EUjwGzEaE2iwNwmE2eUlwhEe87q7U1mVEbUGdwtUd-2u2J0bS1LwTwKG1pg2fwxyo6O1FwlEcUed6goK2OubxKi2qi7E5yqcxK2K1ew&__csr=gevd6gmNp2n94N58hb6lEBsyF99cyH-p5JXlGV9CJ9uCp2dFjBJ5muytbBCKmFUWuLVBFkuAiEHCBKEDGKB-Qhat2VVECUnBBAVV9RgWm4GK4uFqDHCgix5vFXAy6FrBghVFQmazokCxm00iw-fxe2e2mdgjwbR02KE2kx-1go2-whEbpk0kUMy0G4EG02nZwGahACgCAE6i0w89FAFEb8d8lz9h4E1k9lcJCAoh42m2p0wwaW1Vp9wAE8A2kje222W10w-UG0ghDBwyg9o7C0eSwLAsE0brE05sO&__comet_req=7&fb_dtsg=NAcNfGGbRdzIaNsmBknwO62IqacSuRPFFm9MdS_ck7M_d2Ljg98SoDw%3A17853828322093762%3A1723293317&jazoest=26316&lsd=sVV3RHR-GQbzjPEXD1QunD&__spin_r=1015584519&__spin_b=trunk&__spin_t=1723432094&fb_api_caller_class=RelayModern&fb_api_req_friendly_name=PolarisProfilePostsTabContentDirectQuery_connection&variables=%7B%22after%22%3A%223371103613180280279_1024760936%22%2C%22before%22%3Anull%2C%22data%22%3A%7B%22count%22%3A12%2C%22include_relationship_info%22%3Atrue%2C%22latest_besties_reel_media%22%3Atrue%2C%22latest_reel_media%22%3Atrue%7D%2C%22first%22%3A12%2C%22last%22%3Anull%2C%22username%22%3A%22agablackjack%22%2C%22__relay_internal__pv__PolarisFeedShareMenurelayprovider%22%3Afalse%7D&server_timestamps=true&doc_id=7935114066569227'
+
+
+
+
+buatkan kode python untuk mengambil API diatas
