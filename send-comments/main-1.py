@@ -64,34 +64,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
         initial_height = driver.execute_script("return document.body.scrollHeight")
 
         while True:
-            
-            # # Cari semua tag <a> di dalam div dengan class yang diberikan
-            # div_container = driver.find_element(By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')
-            # a_tags = div_container.find_elements(By.TAG_NAME, "a")
-
-            # # Loop melalui setiap <a> dan klik satu per satu
-            # for a_tag in a_tags:
-            #     try:
-            #         # Scroll ke elemen <a> untuk memastikan terlihat
-            #         driver.execute_script("arguments[0].scrollIntoView();", a_tag)
-                    
-            #         # Tunggu elemen <a> dapat di-klik
-            #         wait.until(EC.element_to_be_clickable(a_tag))
-                    
-            #         # Klik elemen <a>
-            #         a_tag.click()
-                    
-            #         close_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Close"]')))
-            #         close_item.click()
-                    
-            #         # Tunggu hingga kembali ke halaman sebelumnya
-            #         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')))
-
-            #     except Exception as e:
-            #         print(f"Gagal klik <a> dengan href {a_tag.get_attribute('href')}: {e}")
-            #         continue
-
-################################################################################################################################
 
             # Cari semua div dengan class tertentu
             div_containers = driver.find_elements(By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')
@@ -112,16 +84,17 @@ def startScraping(chrome_driver_path, user_name, password_user):
                         # Klik elemen <a>
                         a_tag.click()
 
-                        # comment section
-                        comment_value = ""
+                        ###### comment section #######
+                        comment_value = "@klinik_kecantikan_athena ULTAH! @dr.richard_lee mau live tgl 19 Agustus jualan produk baru!"
 
                         # Menginputkan comment
-                        comment_input = driver.find_element(By.CSS_SELECTOR, 'svg[aria-label="Search"]')
+                        comment_input = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'textarea[aria-label="Add a comment…"]')))
                         comment_input.send_keys(comment_value)
                         comment_input.send_keys(Keys.ENTER)
 
                         close_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Close"]')))
                         close_item.click()
+                        ###### /.comment section #######
 
                         # Tunggu hingga kembali ke halaman sebelumnya
                         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')))
