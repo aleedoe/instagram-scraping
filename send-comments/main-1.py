@@ -37,21 +37,19 @@ def startScraping(chrome_driver_path, user_name, password_user):
         # Tunggu hingga elemen pencarian terlihat dan klik
         search_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Search"]')))
         search_item.click()
-        # time.sleep(5)
 
-        #target the search input field
+        # Target the search input field
         searchbox = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@placeholder='Search']")))
         searchbox.clear()
 
-        #search for the @handle or keyword
+        # Search for the @handle or keyword
         keyword = "@dr.richard_lee"
         searchbox.send_keys(keyword)
-        
+
         # Check if the keyword starts with "@"
         if keyword.startswith("@"):
-            # Remove the "@" symbol
             keyword = keyword[1:]
-            
+
         # Wait until the first result appears in the search dropdown
         first_result = wait.until(EC.presence_of_element_located((By.XPATH, f'//span[text()="{keyword}"]')))
 
@@ -59,12 +57,11 @@ def startScraping(chrome_driver_path, user_name, password_user):
         first_result = driver.find_element(By.XPATH, f'//span[text()="{keyword}"]')
         first_result.click()
         time.sleep(5)
-        
+
         # Get the initial page height
         initial_height = driver.execute_script("return document.body.scrollHeight")
 
         while True:
-
             # Cari semua div dengan class tertentu
             div_containers = driver.find_elements(By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')
 
@@ -72,7 +69,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
             for div_container in div_containers:
                 a_tags = div_container.find_elements(By.TAG_NAME, "a")
 
-                # Loop melalui setiap <a> dan klik satu per satu
                 for a_tag in a_tags:
                     try:
                         # Scroll ke elemen <a> untuk memastikan terlihat
@@ -92,6 +88,10 @@ def startScraping(chrome_driver_path, user_name, password_user):
                         comment_input.send_keys(comment_value)
                         comment_input.send_keys(Keys.ENTER)
 
+                        # Tunggu tombol 'Post' menjadi aktif dan klik
+                        post_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Post')]")))
+                        post_button.click()
+
                         close_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Close"]')))
                         close_item.click()
                         ###### /.comment section #######
@@ -103,8 +103,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
                         print(f"Gagal klik <a> dengan href {a_tag.get_attribute('href')}: {e}")
                         continue
 
-
-            
             # Scroll down to the bottom of the page
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
@@ -118,7 +116,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
                 break  # Exit the loop when you can't scroll further
 
             initial_height = current_height  # Update the initial height for the next iteration
-        
 
     finally:
         driver.quit()
