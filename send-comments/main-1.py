@@ -44,7 +44,7 @@ def startScraping(chrome_driver_path, user_name, password_user):
         searchbox.clear()
 
         #search for the @handle or keyword
-        keyword = "@webzet.dev"
+        keyword = "@dr.richard_lee"
         searchbox.send_keys(keyword)
         
         # Check if the keyword starts with "@"
@@ -58,7 +58,7 @@ def startScraping(chrome_driver_path, user_name, password_user):
         # Re-locate the element before clicking to avoid StaleElementReferenceException
         first_result = driver.find_element(By.XPATH, f'//span[text()="{keyword}"]')
         first_result.click()
-        time.sleep(8)
+        time.sleep(5)
         
         # Get the initial page height
         initial_height = driver.execute_script("return document.body.scrollHeight")
@@ -71,7 +71,7 @@ def startScraping(chrome_driver_path, user_name, password_user):
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
             # Wait for a moment to allow new content to load (adjust as needed)
-            time.sleep(5)
+            time.sleep(3)
             
             # Parse the HTML
             html = driver.page_source
