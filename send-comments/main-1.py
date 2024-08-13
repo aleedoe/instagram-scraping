@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
+from selenium.webdriver.common.keys import Keys
 import time
 
 def startScraping(chrome_driver_path, user_name, password_user):
@@ -64,6 +64,74 @@ def startScraping(chrome_driver_path, user_name, password_user):
         initial_height = driver.execute_script("return document.body.scrollHeight")
 
         while True:
+            
+            # # Cari semua tag <a> di dalam div dengan class yang diberikan
+            # div_container = driver.find_element(By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')
+            # a_tags = div_container.find_elements(By.TAG_NAME, "a")
+
+            # # Loop melalui setiap <a> dan klik satu per satu
+            # for a_tag in a_tags:
+            #     try:
+            #         # Scroll ke elemen <a> untuk memastikan terlihat
+            #         driver.execute_script("arguments[0].scrollIntoView();", a_tag)
+                    
+            #         # Tunggu elemen <a> dapat di-klik
+            #         wait.until(EC.element_to_be_clickable(a_tag))
+                    
+            #         # Klik elemen <a>
+            #         a_tag.click()
+                    
+            #         close_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Close"]')))
+            #         close_item.click()
+                    
+            #         # Tunggu hingga kembali ke halaman sebelumnya
+            #         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')))
+
+            #     except Exception as e:
+            #         print(f"Gagal klik <a> dengan href {a_tag.get_attribute('href')}: {e}")
+            #         continue
+
+################################################################################################################################
+
+            # Cari semua div dengan class tertentu
+            div_containers = driver.find_elements(By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')
+
+            # Loop melalui setiap div dan cari <a> di dalamnya
+            for div_container in div_containers:
+                a_tags = div_container.find_elements(By.TAG_NAME, "a")
+
+                # Loop melalui setiap <a> dan klik satu per satu
+                for a_tag in a_tags:
+                    try:
+                        # Scroll ke elemen <a> untuk memastikan terlihat
+                        driver.execute_script("arguments[0].scrollIntoView();", a_tag)
+
+                        # Tunggu elemen <a> dapat di-klik
+                        wait.until(EC.element_to_be_clickable(a_tag))
+
+                        # Klik elemen <a>
+                        a_tag.click()
+
+                        # comment section
+                        comment_value = ""
+
+                        # Menginputkan comment
+                        comment_input = driver.find_element(By.CSS_SELECTOR, 'svg[aria-label="Search"]')
+                        comment_input.send_keys(comment_value)
+                        comment_input.send_keys(Keys.ENTER)
+
+                        close_item = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'svg[aria-label="Close"]')))
+                        close_item.click()
+
+                        # Tunggu hingga kembali ke halaman sebelumnya
+                        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div._ac7v.xras4av.xgc1b0m.xat24cr.xzboxd6')))
+
+                    except Exception as e:
+                        print(f"Gagal klik <a> dengan href {a_tag.get_attribute('href')}: {e}")
+                        continue
+
+
+            
             # Scroll down to the bottom of the page
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
