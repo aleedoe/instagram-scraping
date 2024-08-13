@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
 import time
 
 def startScraping(chrome_driver_path, user_name, password_user):
@@ -43,7 +44,7 @@ def startScraping(chrome_driver_path, user_name, password_user):
         searchbox.clear()
 
         #search for the @handle or keyword
-        keyword = "@dr.richard_lee"
+        keyword = "@webzet.dev"
         searchbox.send_keys(keyword)
         
         # Check if the keyword starts with "@"
@@ -51,15 +52,19 @@ def startScraping(chrome_driver_path, user_name, password_user):
             # Remove the "@" symbol
             keyword = keyword[1:]
             
-        # Find the first element with the specified XPath that matches the keyword    
-        first_result = driver.find_element(By.XPATH, f'//span[text()="{keyword}"]')
+        # Wait until the first result appears in the search dropdown
+        first_result = wait.until(EC.presence_of_element_located((By.XPATH, f'//span[text()="{keyword}"]')))
 
-        # Click on the found element (assuming it represents the desired search result)
+        # Re-locate the element before clicking to avoid StaleElementReferenceException
+        first_result = driver.find_element(By.XPATH, f'//span[text()="{keyword}"]')
         first_result.click()
         time.sleep(8)
         
         # Get the initial page height
         initial_height = driver.execute_script("return document.body.scrollHeight")
+        
+        # Create a list to store htmls
+        soups = []
 
         while True:
             # Scroll down to the bottom of the page
@@ -70,7 +75,10 @@ def startScraping(chrome_driver_path, user_name, password_user):
             
             # Parse the HTML
             html = driver.page_source
-            
+
+            # Create a BeautifulSoup object from the scraped HTML
+            soups.append(BeautifulSoup(html, 'html.parser'))
+
             # Get the current page height
             current_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -78,6 +86,22 @@ def startScraping(chrome_driver_path, user_name, password_user):
                 break  # Exit the loop when you can't scroll further
 
             initial_height = current_height  # Update the initial height for the next iteration
+        
+        # List to store the post image URLs
+        post_urls = []
+
+        for soup in soups:
+            # Find all anchor elements with href attributes
+            anchors = soup.find_all('a', href=True)
+            
+            # Filter URLs that start with "/p/" or "/reel/"
+            post_urls.extend([anchor['href'] for anchor in anchors if anchor['href'].startswith(("/p/", "/reel/"))])
+
+        # Convert the list to a set to remove duplicates
+        unique_post_urls = list(set(post_urls))
+        print(unique_post_urls)
+
+        print(f"before: {len(post_urls)}, after: {len(unique_post_urls)}")
         
 
     finally:
