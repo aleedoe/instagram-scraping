@@ -62,9 +62,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
         
         # Get the initial page height
         initial_height = driver.execute_script("return document.body.scrollHeight")
-        
-        # Create a list to store htmls
-        soups = []
 
         while True:
             # Scroll down to the bottom of the page
@@ -72,12 +69,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
 
             # Wait for a moment to allow new content to load (adjust as needed)
             time.sleep(3)
-            
-            # Parse the HTML
-            html = driver.page_source
-
-            # Create a BeautifulSoup object from the scraped HTML
-            soups.append(BeautifulSoup(html, 'html.parser'))
 
             # Get the current page height
             current_height = driver.execute_script("return document.body.scrollHeight")
@@ -86,22 +77,6 @@ def startScraping(chrome_driver_path, user_name, password_user):
                 break  # Exit the loop when you can't scroll further
 
             initial_height = current_height  # Update the initial height for the next iteration
-        
-        # List to store the post image URLs
-        post_urls = []
-
-        for soup in soups:
-            # Find all anchor elements with href attributes
-            anchors = soup.find_all('a', href=True)
-            
-            # Filter URLs that start with "/p/" or "/reel/"
-            post_urls.extend([anchor['href'] for anchor in anchors if anchor['href'].startswith(("/p/", "/reel/"))])
-
-        # Convert the list to a set to remove duplicates
-        unique_post_urls = list(set(post_urls))
-        print(unique_post_urls)
-
-        print(f"before: {len(post_urls)}, after: {len(unique_post_urls)}")
         
 
     finally:
